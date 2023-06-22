@@ -6,19 +6,28 @@ import Layout from './components/Layout'
 import Panel from './pages/Panel'
 import List from './pages/List'
 import Settings from './pages/Settings'
+import {loader as listLoader} from './pages/List'
+import {loader as mainPageLoader, action as mainPageAction} from './pages/Panel'
+import {action as newTaskAction} from './components/Layout'
+
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    loader: mainPageLoader,
+    action: newTaskAction,
     children: [
       {
         index: true,
-        element: <Panel />
+        element: <Panel />, 
+        loader: mainPageLoader,
+        action: mainPageAction
       }, 
       {
-        path: '/lista/:lista',
-        element: <List />
+        path: '/lista/:listId',
+        element: <List />,
+        loader: listLoader
       },
       {
         path: '/configuracion',

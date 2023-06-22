@@ -19,6 +19,11 @@ html, body{
     font-family: 'Rubik', sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 1rem;
+    background: $secondary; /* make scrollbar transparent */
+}
+
 .bg-secondary-gradient{
     background: $secondary-gradient;
 }
@@ -42,12 +47,18 @@ html, body{
 
 //Sidebar styles
 .sidebar{
-    width: 350px;
+    width: 40%;
     height: 100%;
+    max-width: 350px;
+}
+
+.aside-header{
+    flex: 0 1 auto;
 }
 
 .task-list{
-    flex: 1;
+    flex: 1 1 auto;
+    overflow: auto;
     .small-icon{
         margin-left: 1.5rem;
     }
@@ -66,19 +77,20 @@ html, body{
 }
 
 .settings-box{
-    &:hover{
+    flex: 0 1 auto;
+    Form:hover, div:hover{
         cursor: pointer;
-        background-color: $secondary;
-        text-decoration: underline;
+        background-color: #078761b7;
     }
+}
+
+#newListNameInput::placeholder{
+    color: white
 }
 
 //Panel search box
 .search-box{
     .options-box{
-        .date-picker{
-            width: 32px;
-        }
 
         .list-picker, .btn-submit{
             height: 2rem;
@@ -128,4 +140,14 @@ html, body{
     position: absolute;
     top: 1.5rem;
     right: 2rem;
+}
+
+// Select icon
+.css-art2ul-ValueContainer2{
+    background: $secondary;
+}
+
+.task-label:hover{
+    cursor: pointer;
+    text-decoration: line-through;
 }

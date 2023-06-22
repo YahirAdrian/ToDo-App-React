@@ -12038,6 +12038,11 @@ html, body {
   font-family: "Rubik", sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 1rem;
+  background: #017C58; /* make scrollbar transparent */
+}
+
 .bg-secondary-gradient {
   background: linear-gradient(180deg, #619B8A 0%, rgba(0, 171, 121, 0.98) 0.01%, #017C58 82.08%);
 }
@@ -12060,12 +12065,18 @@ html, body {
 }
 
 .sidebar {
-  width: 350px;
+  width: 40%;
   height: 100%;
+  max-width: 350px;
+}
+
+.aside-header {
+  flex: 0 1 auto;
 }
 
 .task-list {
-  flex: 1;
+  flex: 1 1 auto;
+  overflow: auto;
 }
 .task-list .small-icon {
   margin-left: 1.5rem;
@@ -12081,15 +12092,22 @@ html, body {
   background-color: #017c58;
 }
 
-.settings-box:hover {
+.settings-box {
+  flex: 0 1 auto;
+}
+.settings-box Form:hover, .settings-box div:hover {
   cursor: pointer;
-  background-color: #017C58;
-  text-decoration: underline;
+  background-color: rgba(7, 135, 97, 0.7176470588);
 }
 
-.search-box .options-box .date-picker {
-  width: 32px;
+#newListNameInput::-moz-placeholder {
+  color: white;
 }
+
+#newListNameInput::placeholder {
+  color: white;
+}
+
 .search-box .options-box .list-picker, .search-box .options-box .btn-submit {
   height: 2rem;
 }
@@ -12133,4 +12151,13 @@ html, body {
   position: absolute;
   top: 1.5rem;
   right: 2rem;
+}
+
+.css-art2ul-ValueContainer2 {
+  background: #017C58;
+}
+
+.task-label:hover {
+  cursor: pointer;
+  text-decoration: line-through;
 }/*# sourceMappingURL=app.css.map */

@@ -1,9 +1,25 @@
 import React from 'react'
+import { useLoaderData } from 'react-router-dom'
+import PanelHeader from '../components/PanelHeader';
+import Tasks from '../components/Tasks';
+
+export function loader({params}){
+
+  const data = JSON.parse(localStorage.getItem('user-data'));
+  const currentList = data.lists.filter(list => list.id === params.listId);
+  return currentList[0];
+}
+
 
 function List() {
+  
+  const list = useLoaderData();
+  const {id, name} = list;
   return (
     <div>
-      <h1>Name of the list</h1>
+      <PanelHeader listName={name} listData={list}/>
+
+      <Tasks listId={id}/>
     </div>
   )
 }

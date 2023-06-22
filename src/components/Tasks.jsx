@@ -1,32 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Task from './templates/Task'
 
-function Tasks() {
+
+
+
+function Tasks({listId, openTaskBar, userData}) {
+
+  const data = JSON.parse(localStorage.getItem('user-data'));
+  const tasksData = !data.tasks ? [] : data.tasks;
+  const tasksOfList = tasksData.filter(task => task.listId === listId);
+  const tasks = tasksData.filter(task => task.today === true);
+  const list = data.lists.filter(list => list.id === listId);
   return (
     <div className='task-box p-4'>
-      <h3 className='text-primary '>Tareas de hoy</h3>
       <div className="tasks ">
-        <div className="task mb-3 p-2 border rounded bg-gray ">
-          <input className='checkbox-complete' title='Completar tarea: [name]' type="checkbox" id="checkbox-1" />
-          <label htmlFor='checkbox-1' className='d-inline ps-2'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tempora asperiores</label>
+        <div className="d-flex justify-content-between w-100 px-4 mb-4">
+          <h3 className='text-primary '>Tareas de {list[0]?.name|| 'Hoy'}</h3>
+          {!listId &&
+            <button className='btn btn-primary text-white ' onClick={openTaskBar}>Agregar Tareas</button>
+          }
+
         </div>
-
-        <div className="task mb-3 p-2 border rounded bg-gray ">
-          <input className='checkbox-complete' title='Completar tarea: [name]' type="checkbox" id="checkbox-2" />
-          <label htmlFor='checkbox-2' className='d-inline ps-2'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tempora asperiores</label>
-        </div>
-
-        <div className="task mb-3 p-2 border rounded bg-gray ">
-          <input className='checkbox-complete' title='Completar tarea: [name]' type="checkbox" id="checkbox-3" />
-          <label htmlFor='checkbox-3' className='d-inline ps-2'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tempora asperiores</label>
-        </div>
-
-        <div className="task mb-3 p-2 border rounded bg-gray ">
-          <input className='checkbox-complete' title='Completar tarea: [name]' type="checkbox" id="checkbox-4" />
-          <label htmlFor='checkbox-4' className='d-inline ps-2'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis tempora asperiores</label>
-        </div>
-
-
-
+        {tasksOfList.length >0 && tasksOfList.map(task => <Task userData={data} key={task.id} taskData={task}/>)}
+        
+        {!listId && tasks.map(task => <Task userData={userData} key={task.id} taskData={task}/>)}
       </div>
     </div>
   )
