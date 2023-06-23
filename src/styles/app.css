@@ -12160,4 +12160,17 @@ html, body {
 .task-label:hover {
   cursor: pointer;
   text-decoration: line-through;
+}
+
+.css-1xc3v61-indicatorContainer, .css-8h3gbh-menu {
+  background: #017C58 !important;
+}
+
+.css-1im77uy-control {
+  background: #017C58 !important;
+  border-radius: 4px;
+}
+
+.css-b62m3t-container {
+  width: 220px;
 }/*# sourceMappingURL=app.css.map */

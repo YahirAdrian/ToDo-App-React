@@ -15,7 +15,7 @@ function Tasks({listId, openTaskBar, userData}) {
     <div className='task-box p-4'>
       <div className="tasks ">
         <div className="d-flex justify-content-between w-100 px-4 mb-4">
-          <h3 className='text-primary '>Tareas de {list[0]?.name|| 'Hoy'}</h3>
+          <h3 className='text-primary '> {list[0]?.name || 'Tareas de Hoy'}</h3>
           {!listId &&
             <button className='btn btn-primary text-white ' onClick={openTaskBar}>Agregar Tareas</button>
           }

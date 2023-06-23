@@ -20,7 +20,13 @@ export async function action({request, params}){
   if(userName){
     const newUser = { 
       userName,
-      lists: [ ],
+      lists: [
+        {
+          id: 'list-1',
+          name: 'Tareas',
+          iconId: '1'
+        }
+       ],
       tasks: []
     }
     localStorage.setItem('user-data', JSON.stringify(newUser));

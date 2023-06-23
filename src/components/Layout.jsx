@@ -1,5 +1,5 @@
 import Select from 'react-select'
-import {Outlet, Form, useLoaderData, Link} from 'react-router-dom'
+import {Outlet, Form, useLoaderData, Link, Navigate} from 'react-router-dom'
 import TaskLists from './TaskLists'
 import {generateId} from '../utilities/utils.js'
 
@@ -66,43 +66,63 @@ export async function action({request, params}){
 
 
 function resetApp(){
-    localStorage.setItem('user-data', '{}')
+    localStorage.setItem('user-data', '')
+    location.href ='/'
 }
 function Layout() { 
     const data = JSON.parse(useLoaderData());
     const lists = !data ? [] : data.lists;
-
     return (
     <div className='d-flex h-100'>
-        <aside className='offcanvas-md offcanvas-start d-sm-flex  h-100 flex-column sidebar bg-secondary-gradient '
-            data-bs-scroll="true" tabIndex="" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel"
-            >
-            <div className="aside-header offcanvas-header">
-                {/* <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> */}
-            </div>
-            <h2 className='d-block text-center text-white mt-5 mx-auto fs-1 offcavas-header' id="offcanvasLabel">Tareas</h2>
-
-
-            <TaskLists className='off-canvas-body' tasklists={lists}/>
-
-            <div className="settings-box my-2 d-flex flex-column">
-                <Form className='newTaskBarForm d-block p-2 mb-2' action='/'method='POST'>
-                    <div className="d-flex form-group">
-                        <Select options={options} menuPlacement='top' name='newListIcon'/>
-
-                        <input className='form-control bg-transparent text-white border-0 ' type="text" name='newListName' id='newListNameInput' placeholder='Nueva lista'/>
-                        <input name='newListSubmit' className=' btn btn-secondary mx-2 my-1 border-white ' type="submit" value="+" />
-
+        {!(data == undefined) &&
+            <aside className='offcanvas-md offcanvas-start d-sm-flex  h-100 flex-column sidebar bg-secondary-gradient '
+                data-bs-scroll="true" tabIndex="" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel"
+                >
+                {data?.userName && 
+                    <div className="d-flex text-white p-2 mt-3 align-items-center">
+                        <img src={personIcon} className='small-icon' alt="User icon" />
+                        <span id="userName" className="text-white ps-2 fw-bold ">{'Bienvenido ' + data.userName}</span>
                     </div>
-                </Form>
-
-                <div className="d-flex ps-3 align-items-center settings">
-                    <img className='small-icon' src={resetIcon} alt="Icono reiniciar" />
-                    <button title='Reiniciar aplicación' type='button' className="btn btn-transparent text-white ps-3 m-0"
-                    onClick={resetApp}>Reinciciar App</button>
+                }
+                <div className="aside-header offcanvas-header">
+                    {/* <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> */}
                 </div>
-            </div>
-        </aside>
+                <h2 className='d-block text-center text-white mt-5 mx-auto fs-1 offcavas-header' id="offcanvasLabel">Tareas</h2>
+
+
+                <TaskLists className='off-canvas-body' tasklists={lists}/>
+
+                <div className="settings-box my-2 d-flex flex-column">
+                    <Form className='newTaskBarForm d-block p-2 mb-2' action='/'method='POST'>
+                        <div className="d-flex form-group">
+                            <Select  options={options} menuPlacement='top'  name='newListIcon' placeholder='Icono'
+                                theme={theme => ({
+                                    ...theme,
+                                    borderRadius: 0,
+                                    colors: {
+                                    ...theme.colors,
+                                    text: '#017C58',
+                                    primary25: '#017C58',
+                                    primary: '#017C58',
+                                    },
+                                })}
+                                isSearchable={false}
+                            />
+
+                            <input className='form-control bg-transparent text-white border-0 ' type="text" name='newListName' id='newListNameInput' placeholder='Nueva lista'/>
+                            <input name='newListSubmit' className=' btn btn-secondary mx-2 my-1 border-white ' type="submit" value="+" />
+
+                        </div>
+                    </Form>
+
+                    <div className="d-flex ps-3 align-items-center settings">
+                        <img className='small-icon' src={resetIcon} alt="Icono reiniciar" />
+                        <button title='Reiniciar aplicación' type='button' className="btn btn-transparent text-white ps-3 m-0"
+                        onClick={resetApp}>Reinciciar App</button>
+                    </div>
+                </div>
+            </aside>
+        }
 
         <main className='w-100 h-100 overflow-auto position-relative '>
             
