@@ -12,6 +12,8 @@ import ideaIcon from '../assets/icons/idea.svg';
 import personIcon from '../assets/icons/person.svg';
 import shapesIcon from '../assets/icons/shapes.svg';
 
+import githubIcon from '../assets/icons/github-logo.png'
+
 const listIcons = [bellIcon, bookIcon, computerIcon, pencilIcon, ideaIcon, personIcon, shapesIcon]
 const options = [
     {value: '0', label: <img className='small-icon' src={listIcons[0]} alt='Icono campana'/>},
@@ -127,6 +129,13 @@ function Layout() {
         <main className='w-100 h-100 overflow-auto position-relative '>
             
             <Outlet />
+
+            <div className="github">
+                <a href="https://github.com/YahirAdrian/ToDo-App-React" target='_blank'>
+                    <img src={githubIcon} alt="Github logo"/> &nbsp; &nbsp;
+                    /YahirAdrian 
+                </a>
+            </div>
         </main>
 
     </div>
