@@ -130,12 +130,12 @@ function Layout() {
             
             <Outlet />
 
-            <div className="github">
+            <!--<div className="github">
                 <a href="https://github.com/YahirAdrian/ToDo-App-React" target='_blank'>
                     <img src={githubIcon} alt="Github logo"/> &nbsp; &nbsp;
                     /YahirAdrian 
                 </a>
-            </div>
+            </div>-->
         </main>
 
     </div>
